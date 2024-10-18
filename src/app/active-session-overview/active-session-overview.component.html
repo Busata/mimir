@@ -9,16 +9,9 @@
         {{activeSession.name}}
     </div>
 
-    @if(timeRemaining().seconds! > 0) {
     <div class="mb-4">
         <button class="simple-button" (click)="stopSession()" >Stop</button>
     </div>
-    } @else {
-        
-        <span class="italic">Session completed</span>
-        <div>
-    </div>
-    }
 
     <app-fading-blocks-time-visualizer  [startTime]="activeSession.startTime" [durationInMinutes]="activeSession.durationInMinutes" ></app-fading-blocks-time-visualizer>
 
