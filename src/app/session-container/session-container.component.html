@@ -1,0 +1,34 @@
+<div class="text-center">
+    <input class="border rounded-md text-center w-full p-1" placeholder="Goal of the session" type="text" #sessionName/>
+    
+    <div class="mt-1">
+        @for (item of presetButtons; track $index) {
+            <button [ngClass]="{'bg-black text-white': isPresetActive(item)}" class="border m-1 h-20 w-48 rounded-md hover:bg-gray-800 hover:text-white" (click)="updateTimer(item.timerValue)">
+                {{item.label}} 
+                <span class="text-xs block">
+                @if(isPresetActive(item)) {
+                    {{humanReadableTime(this.sessionTime())}}
+                } @else {
+                    {{item.subscript}}
+                }
+                </span>
+            </button>
+        }
+    </div>
+    <input class="w-full text-black " type="range" step="15" min="30" max="240" [value]="sessionTime()" (input)="updateTimer(timer.value)" #timer/>
+    <span class="italic">
+        Ends at {{endTime()}}
+    </span>
+
+    <button class="simple-button w-full text-white bg-black font-bold hover:bg-gray-800" (click)="startSession(sessionName.value, this.sessionTime())">
+        Start
+    </button>
+    <div class="mt-4">
+        @if(sessionTrackerService.getCompletedSessions().length > 0) {
+            <h1 class="italic">Previous sessions</h1>
+            @for(session of sessionTrackerService.getCompletedSessions(); track $index) {
+                <span class="italic text-xs">{{session.name || 'Untitled'}} ({{humanReadableTime(session.durationInMinutes)}} • {{formatDate(session.startTime)}})</span>
+            }
+         }
+    </div>
+</div>

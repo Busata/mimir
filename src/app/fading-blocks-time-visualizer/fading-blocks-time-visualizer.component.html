@@ -1,0 +1,9 @@
+@for(_ of [].constructor(rows()); track $index; let row=$index) {
+    @for(column of [].constructor(15); track $index; let col = $index) {
+        <div [ngStyle]="{'background-color': getColour(row, col)}" class="size-4 inline-block m-1 rounded-sm text-white">
+
+        </div>
+        }
+        <div></div>
+    
+}

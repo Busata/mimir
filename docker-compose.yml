@@ -1,0 +1,22 @@
+version: '3.5'
+services:
+  proxy.mimir.frontend:
+    container_name: proxy.mimir.frontend
+    restart: always
+    build: mimir-frontend
+    ports:
+      - target: 80
+        published: 10080
+        protocol: tcp
+        mode: host
+  proxy.mimir-reverse-proxy:
+    container_name: proxy.mimir.reverse-proxy
+    build: devops/reverse-proxy
+    restart: always
+    environment:
+      - VIRTUAL_HOST=mimir.busata.io
+      - LETSENCRYPT_HOST=mimir.busata.io
+networks:
+  default:
+    name: veevi
+    external: true
