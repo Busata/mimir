@@ -3,7 +3,7 @@ services:
   proxy.mimir.frontend:
     container_name: proxy.mimir.frontend
     restart: always
-    build: mimir-frontend
+    build: .
     ports:
       - target: 80
         published: 10080
