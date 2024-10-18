@@ -27,7 +27,9 @@
         @if(sessionTrackerService.getCompletedSessions().length > 0) {
             <h1 class="italic">Previous sessions</h1>
             @for(session of sessionTrackerService.getCompletedSessions(); track $index) {
-                <span class="italic text-xs">{{session.name || 'Untitled'}} ({{humanReadableTime(session.durationInMinutes)}} • {{formatDate(session.startTime)}})</span>
+                <div class="italic text-xs">
+                    {{session.name || 'Untitled'}} ({{humanReadableTime(session.durationInMinutes)}} • {{formatDate(session.startTime)}})
+                </div>
             }
          }
     </div>
